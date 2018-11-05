@@ -10,7 +10,7 @@ body {
 	background-color: #000;
 }
 </style>
-<script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"
+<script src="phaser.min.js"
 	type="text/javascript"></script>
 </head>
 <body>
@@ -72,6 +72,7 @@ body {
 
 			game.load.audio('shoot', 'sound/shoot.wav');
 			game.load.audio('music', 'sound/music.mp3');
+			game.load.audio('explosion-sound', 'sound/explosion.wav');
 
 		}
 
@@ -206,6 +207,7 @@ body {
 
 			// Add sound - New
 			shooting_effect = game.add.audio('shoot');
+			explosion_effect = game.add.audio('explosion-sound');
 			music = game.add.audio('music');
 			music.play();
 
@@ -378,6 +380,7 @@ body {
 			explosion.body.velocity.y = enemy.body.velocity.y;
 			explosion.alpha = 0.7;
 			explosion.play('explosion', 30, false, true);
+			explosion_effect.play();			
 			enemy.kill();
 
 			player.damage(enemy.damageAmount);
@@ -390,8 +393,10 @@ body {
 			explosion.body.velocity.y = enemy.body.velocity.y;
 			explosion.alpha = 0.7;
 			explosion.play('explosion', 30, false, true);
+			explosion_effect.play();
 			enemy.kill();
 			bullet.kill();
+			
 
 			// Increase score
 			score += enemy.damageAmount * 10;
